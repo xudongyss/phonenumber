@@ -2,7 +2,7 @@
 /**
  * 电话号码验证
  */
-namespace phonenumber;
+namespace XuDongYss\PhoneNumber;
 
 use libphonenumber\PhoneNumberUtil;
 
