@@ -1,0 +1,18 @@
+{
+    "name": "xudongyss/phonenumber",
+    "type": "library",
+    "require": {
+        "giggsey/libphonenumber-for-php": "^8.12"
+    },
+    "authors": [
+        {
+            "name": "xudongyss",
+            "email": "xudong.yss@gmail.com"
+        }
+    ],
+	"autoload": {
+        "psr-4": {
+            "phonenumber\\": "src/"
+        }
+    }
+}
