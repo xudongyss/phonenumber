@@ -28,7 +28,7 @@ class PhoneNumber{
 	public static function isMobile($countryCallingCode, $phoneNumber) {
 		$phoneNumberObject = static::parsePhoneNumber($countryCallingCode, $phoneNumber);
 		if($phoneNumberObject === false) return false;
-		if(static::phoneNumberUtil()->getNumberType($phoneNumberObject) !== 'MOBILE') return false;
+		if(static::phoneNumberUtil()->getNumberType($phoneNumberObject) !== 1) return false;
 		
 		return $phoneNumberObject;
 	}
