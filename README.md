@@ -1,7 +1,5 @@
 # 电话号码
 
-[TOC]
-
 ## 安装
 
 ```
@@ -23,14 +21,16 @@ use phonenumber\PhoneNumber;
 $countryCallingCode = '86';
 $phoneNumber = '';
 $phoneNumber = PhoneNumber::isMobile($countryCallingCode, $phoneNumber);
-var_dump($phoneNumber);//不是手机号返回 false，是手机号返回手机号码对象
+// false or libphonenumber\PhoneNumber Object
+var_dump($phoneNumber);
 ```
 
 ### 验证电话号码（含手机号和固话）
 
 ```php
 $phoneNumber = PhoneNumber::isPhoneNumber($countryCallingCode, $phoneNumber);
-var_dump($phoneNumber);//不是电话号码返回 false，是手机号返回电话号码对象
+// false or libphonenumber\PhoneNumber Object
+var_dump($phoneNumber);
 ```
 
 ### 获取号码
@@ -42,3 +42,12 @@ var_dump($phoneNumber);//不是电话号码返回 false，是手机号返回电�
 PhoneNumber::getNationalNumber($phoneNumber);
 ```
 
+## libphonenumber\PhoneNumber Object
+| Function               | Value                |
+|------------------------|----------------------|
+| getCountryCode()       | 86                   |
+| getNationalNumber()    | 13500000001          |
+| getExtension()         |                      |
+| getCountryCodeSource() | FROM_DEFAULT_COUNTRY |
+| isItalianLeadingZero() | false                |
+| getRawInput()          | 173 0000 0000        |
