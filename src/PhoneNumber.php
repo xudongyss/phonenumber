@@ -7,17 +7,19 @@ namespace xudongyss\phonenumber;
 
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
+use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 
 class PhoneNumber
 {
     /**
      * 格式是否正确
-     * @param string $countryCallingCode 国际区号：例如：中国 86
      * @param string $phoneNumber 手机号号码
+     * @param string $defaultRegion 默认国家
+     * @param string $countryCallingCode 国际区号：例如：中国 86
      */
-    public static function isPhoneNumber($countryCallingCode, $phoneNumber, $defaultRegion = null)
+    public static function isPhoneNumber($phoneNumber, $defaultRegion = null, $countryCallingCode = null)
     {
-        $phoneNumberObject = static::parsePhoneNumber($countryCallingCode, $phoneNumber, $defaultRegion);
+        $phoneNumberObject = static::parsePhoneNumber($phoneNumber, $defaultRegion, $countryCallingCode);
         if ($phoneNumberObject === false) return false;
 
         return $phoneNumberObject;
@@ -25,12 +27,13 @@ class PhoneNumber
 
     /**
      * 手机号码验证
-     * @param string $countryCallingCode 国际区号：例如：中国 86
      * @param string $phoneNumber 手机号号码
+     * @param string $defaultRegion 默认国家
+     * @param string $countryCallingCode 国际区号：例如：中国 86
      */
-    public static function isMobile($countryCallingCode, $phoneNumber, $defaultRegion = null)
+    public static function isMobile($phoneNumber, $defaultRegion = null, $countryCallingCode = null)
     {
-        $phoneNumberObject = static::parsePhoneNumber($countryCallingCode, $phoneNumber, $defaultRegion);
+        $phoneNumberObject = static::parsePhoneNumber($phoneNumber, $defaultRegion, $countryCallingCode);
         if ($phoneNumberObject === false) return false;
         if (static::phoneNumberUtil()->getNumberType($phoneNumberObject) === PhoneNumberType::MOBILE) return $phoneNumberObject;
 
@@ -59,10 +62,11 @@ class PhoneNumber
 
     /**
      * 解析手机号号码，并判断是否是正确的手机号码
-     * @param string $countryCallingCode 国际区号：例如：中国 86
      * @param string $phoneNumber 手机号号码
+     * @param string $defaultRegion 默认国家
+     * @param string $countryCallingCode 国际区号：例如：中国 86
      */
-    protected static function parsePhoneNumber($countryCallingCode, $phoneNumber, $defaultRegion = null)
+    public static function parsePhoneNumber($phoneNumber, $defaultRegion = null, $countryCallingCode = null)
     {
         if ($defaultRegion) {
             $phoneNumberObject = static::phoneNumberUtil()->parse($phoneNumber, $defaultRegion);
@@ -87,6 +91,6 @@ class PhoneNumber
 
     protected static function geoCoder()
     {
-        return \libphonenumber\geocoding\PhoneNumberOfflineGeocoder::getInstance();
+        return PhoneNumberOfflineGeocoder::getInstance();
     }
 }
