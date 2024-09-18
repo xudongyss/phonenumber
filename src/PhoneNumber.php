@@ -3,7 +3,7 @@
  * 电话号码验证
  */
 
-namespace XuDongYss\PhoneNumber;
+namespace xudongyss\phonenumber;
 
 use libphonenumber\PhoneNumberType;
 use libphonenumber\PhoneNumberUtil;
